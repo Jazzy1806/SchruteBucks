@@ -40,7 +40,6 @@ function connectToChat(username) {
                 // console.log("data.group_id "+data.group_id)
                 newMessages.set(data.fromLogin, data.message);
                 $('#usernameAppender_' + data.fromLogin).append('<span id="newMessage_' + data.fromLogin + '" style="color: yellow; font-weight: bold">*New</span>');
-
                 console.log("kebuat")
                 let messageTemplateHTML = "";
                 messageTemplateHTML = messageTemplateHTML + '<div id="child_message" class="d-flex justify-content-end mb-4">'+
@@ -74,7 +73,6 @@ function connectToChat(username) {
                     } else {
                         newMessages.set(data.groupId, data.message);
                         $('#userGroupAppender_' + data.groupId).append('<span id="newMessage_' + data.groupId + '" style="color: yellow; font-weight: bold">*New</span>');
-
                         console.log("kebuat")
                         let messageTemplateHTML = "";
                         messageTemplateHTML = messageTemplateHTML + '<div id="child_message" class="d-flex justify-content-end mb-4">'+
