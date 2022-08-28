@@ -1,5 +1,6 @@
 package com.skilldistillery.rewardforpay.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.rewardforpay.data.AdminDAO;
 import com.skilldistillery.rewardforpay.data.UserDAO;
@@ -31,14 +33,9 @@ public class AccountController {
 		User user = (User) session.getAttribute("loggedInUser");
 		Employee employee = (Employee) session.getAttribute("userinfo");
 		if (user != null) {
-			model.addAttribute("awardbalance",userDao.findPointBalance(employee.getId()));
-			session.setAttribute("loggedInUser", user);
-			employee = user.getEmployee();
-			session.setAttribute("userinfo", employee);
-			List<Prize> prizes = userDao.findAllActivePrizes();
-			session.setAttribute("prizes", userDao.findAllPrizes());
-			model.addAttribute("numOfPrizes", prizes.size());
-			model.addAttribute("prizeError", "Sorry, something went wrong. Please try again later.");
+			List<Prize> wishlist = userDao.showWishList(employee.getId());
+			session.setAttribute("wishlist", wishlist);
+			model.addAttribute("numOfPrizes", wishlist.size());
 			session.setAttribute("rewardBalance", userDao.findPointBalance(employee.getId())); 
 			session.setAttribute("claimed", adminDao.claimedInitial(employee.getId())); 
 			session.setAttribute("claimedT", adminDao.claimedInitialT(employee.getId())); 
@@ -61,6 +58,15 @@ public class AccountController {
 	public String pendingAward(HttpSession session, Model model, int paid) {
 		model.addAttribute("award",userDao.findAwardByID(paid));
 		return "award";
+		
+	}
+	@RequestMapping(path = { "claimedPrizes.do" })
+	public String claimedPrizes(HttpSession session, Model model) {
+		Employee emp = (Employee) session.getAttribute("userinfo");
+		List<Prize> claimedPrizes = adminDao.claimedPrizes(emp.getId());
+		model.addAttribute("record",claimedPrizes);
+		model.addAttribute("numOfPrizes", claimedPrizes.size());
+		return "claimedPrizes";
 		
 	}
 	@RequestMapping(path = { "findEmployeeTest.do" })
@@ -105,7 +111,7 @@ public class AccountController {
 		Employee employee = (Employee) session.getAttribute("userinfo");
 		int remainder = userDao.findPointBalance(employee.getId());
 		if(adminDao.createRedemption(p,employee,remainder)) {
-			model.addAttribute("redeemed","Congratulations! Please allow 5-10 business days to receive your item at.");		
+			model.addAttribute("redeemed","Congratulations! Please allow 5-10 business days to receive your item at:");		
 		}else {		
 			model.addAttribute("Failed","You do not have enough points to redeem this prize.");
 		}
@@ -122,21 +128,60 @@ public class AccountController {
 		
 	}
 	@RequestMapping(path = { "changeToEmployee.do" },method = RequestMethod.GET)
-	public String changeToEmployee(HttpSession session, Model model) {
+	public String changeToEmployee(HttpSession session, Model model,RedirectAttributes redir) {
 		User user = (User) session.getAttribute("loggedInUser");
 		session.setAttribute("role", user.getRoles().get(1).getId());
-		return "account";
+		return "redirect:account.do";
 		
 	}
 	@RequestMapping(path = { "changeToAdmin.do" },method = RequestMethod.GET)
-	public String changeToAdmin(HttpSession session, Model model) {
+	public String changeToAdmin(HttpSession session, Model model,RedirectAttributes redir) {
 		User user = (User) session.getAttribute("loggedInUser");
 		if(user.getRoles().size()==1) {
 			return "failedAdmin";
 		}else {
 		session.setAttribute("role", user.getRoles().get(0).getId());
-		return "account";
+		return "redirect:account.do";
 		}
 		
+	}
+	@RequestMapping(path = { "eventsList.do" })
+	public String eventsList(HttpSession session, Model model,int empId) {
+		System.out.println(empId);
+		model.addAttribute("events",adminDao.showEvents(empId));
+		return "eventsPage";
+		
+	}
+	@RequestMapping(path = { "joinedEvents.do" })
+	public String joinedEvents(HttpSession session, Model model,int empId) {
+		System.out.println(empId);
+		model.addAttribute("joined",adminDao.showRegistered(empId));
+		return "joinedEvents";
+		
+	}
+	@RequestMapping(path="createEvent.do")
+	public String createEvent(Model model) {
+		return "createEvent";
+	}
+	@RequestMapping(path="contact.do")
+	public String contact(Model model) {
+		return "contact";
+	}
+	@RequestMapping(path = "createEvent.do", method = RequestMethod.POST)
+	public String createdEvent(HttpSession session, PointAwarded award, Model model, int empId,String date, int userId, RedirectAttributes redir) {
+		PointAwarded newAward = userDao.createAward(award, empId, userId);
+		
+		LocalDate localDate = LocalDate.parse(date);
+		newAward.setIssued(localDate);
+		Employee emp = (Employee) session.getAttribute("userinfo");
+		redir.addAttribute("empId", emp.getId());
+		return "redirect:eventsList.do";
+	}
+	@RequestMapping(path = "viewEmployee.do")
+	public String viewEmployee(int id, Model model) {
+		model.addAttribute("employee", userDao.findEmployeeById(id));
+		model.addAttribute("joined",adminDao.showRegistered(id));
+		model.addAttribute("wishlist", userDao.showWishList(id));
+		return "viewEmployee";
 	}
 }

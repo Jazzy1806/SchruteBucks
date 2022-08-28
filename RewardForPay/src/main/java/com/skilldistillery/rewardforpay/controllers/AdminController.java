@@ -1,5 +1,6 @@
 package com.skilldistillery.rewardforpay.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -64,14 +65,14 @@ public class AdminController {
 	public String activateUser(Model model, int userId) {
 		boolean activateUser = userDao.enableUser(userId);
 		model.addAttribute("activated", activateUser);
-		return "admin/adminHome";
+		return "account";
 	}
 
 	@RequestMapping(path = "deactivateUser.do", method = RequestMethod.GET)
 	public String deactivateUser(Model model, int userId) {
 		boolean deactivateUser = userDao.disableUser(userId);
 		model.addAttribute("deactivated", deactivateUser);
-		return "admin/adminHome";
+		return "account";
 	}
 	
 	
@@ -124,13 +125,15 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "adminUpdateEmployee.do", method = RequestMethod.POST)
-	public String updateEmployeeDetails(int id, int addressId, Address address, Employee employee, Model model,
+	public String updateEmployeeDetails(int id,int depId, String date, int addressId, Address address, Employee employee, Model model,
 			HttpSession session) {
 
 		Address addressUpdate = userDao.updateAddress(address, addressId);
 		employee.setAddress(addressUpdate);
+		LocalDate localDate = LocalDate.parse(date);
+		employee.setBirthday(localDate);
 		session.setAttribute("address", addressUpdate.getId());
-		userDao.updateEmployee(id, employee);
+		userDao.updateEmployee(id, employee, depId);
 		model.addAttribute("employee", employee);
 		return "admin/adminShowEmployee";
 	}

@@ -6,12 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Employee List</title>
+<link rel ="stylesheet" type ="text/css" href="CSS/adminDashboard.css">
+
 </head>
 <body>
 <%@ include file="../nav.jsp" %>
 
-<h1>Inside Admin All Employees</h1>
 
+<div class ="container-fluid">
+<div class ="space">
+<h1>Employees</h1>
  <table class="table table-striped table-hover">
 		<thead class="table-light">
 			<tr>
@@ -47,7 +51,7 @@
 					<td><a href="findEmployee.do?employeeId=${employee.id}">${employee.address.phone}</a></td>
 					<td><a href="findEmployee.do?employeeId=${employee.id}">${employee.birthday}</a></td>
 					<td><a href="findEmployee.do?employeeId=${employee.id}">${employee.department.name}</a></td>
-					<td><form action="adminUpdateEmployeeForm.do"><input type ="hidden" name="id" value="${employee.id}"><button type="submit" class="btn btn-primary btn-sm">Update this Employee</button></form>
+					<td><form action="adminUpdateEmployeeForm.do"><input type ="hidden" name="id" value="${employee.id}"><button type="submit" class="btn btn-warning btn-sm">Update this Employee</button></form>
 					<td><form action="adminDeleteEmployeeForm.do"><input type ="hidden" name="id" value="${employee.id}"><button type="submit" class="btn btn-danger btn-sm">Delete this Employee</button></form>
 					
 					
@@ -57,7 +61,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+	</div>
+	</div>
 
 </body>
 </html>

@@ -514,7 +514,7 @@ INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`,
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (8, 'Guest', 'Guest', 1, 8, 9, NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSeTZh5JQUaK4oKl-rnqbpgp0wDOiafD8FiA&usqp=CAU', '1982-02-08', 'Welcome to the site! Create a user to view more!', 1);
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (9, 'Michael', 'Scott', 84336, 9, 10, NULL, 'https://roost.nbcuni.com/bin/viewasset.html/content/dam/Peacock/Landing-Pages/2-0-design/the-office/cast-the-office-michael-scott.jpg/_jcr_content/renditions/original.JPEG?downsize=1200:*&output-quality=70', '1972-07-06', 'Sometimes I’ll start a sentence and I don’t even know where it’s going. I just hope I find it along the way.', 1);
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (10, 'Dwight', 'Schrute', 51553, 10, 10, NULL, 'https://roost.nbcuni.com/bin/viewasset.html/content/dam/Peacock/Landing-Pages/2-0-design/the-office/cast-the-office-dwight-schrute.jpg/_jcr_content/renditions/original.JPEG?downsize=1200:*&output-quality=70', '1986-01-14', 'I never thought I’d say this, but I think I ate too much bone marrow.”', 2);
-INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (11, 'Pam', 'Beesley', 122978, 11, 10, NULL, 'https://roost.nbcuni.com/bin/viewasset.html/content/dam/Peacock/Landing-Pages/2-0-design/the-office/cast-the-office-pam-beesly.jpg/_jcr_content/renditions/original.JPEG?downsize=1200:*&output-quality=70', '1980-11-14', 'And I feel God in this Chili’s tonight.”', 2);
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (11, 'Pam', 'Beesley', 122978, 11, 10, NULL, 'https://roost.nbcuni.com/bin/viewasset.html/content/dam/Peacock/Landing-Pages/2-0-design/the-office/cast-the-office-pam-beesly.jpg/_jcr_content/renditions/original.JPEG?downsize=1200:*&output-quality=70', '1980-11-14', 'And I feel God in this Chili’s tonight.', 2);
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (12, 'Jim', 'Halpert', 163173, 12, 10, NULL, 'https://roost.nbcuni.com/bin/viewasset.html/content/dam/Peacock/Landing-Pages/2-0-design/the-office/cast-the-office-jim-halpert.jpg/_jcr_content/renditions/original.JPEG?downsize=1200:*&output-quality=70', '1988-12-24', 'Everything I have I owe to this job… this stupid, wonderful, boring, amazing job.', 2);
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (13, 'Kelly', 'Kapoor', 95774, 13, 10, NULL, 'https://roost.nbcuni.com/bin/viewasset.html/content/dam/Peacock/Landing-Pages/2-0-design/the-office/cast-the-office-kelly-kapoor.jpg/_jcr_content/renditions/original.JPEG?downsize=1200:*&output-quality=70', '1995-08-29', 'I talk a lot, so I’ve learned to tune myself out.', 2);
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `salary`, `address_id`, `department_id`, `supervisor_id`, `employee_photo`, `birthday`, `description`, `request_status_id`) VALUES (14, 'Phyllis', 'Vance', 46627, 14, 10, NULL, 'https://roost.nbcuni.com/bin/viewasset.html/content/dam/Peacock/Landing-Pages/2-0-design/the-office/cast-the-office-phyllis-vance.jpg/_jcr_content/renditions/original.JPEG?downsize=1200:*&output-quality=70', '1981-03-29', 'I’m glad Michael’s getting help. He has a lot of issues, and he’s stupid.', 1);
@@ -565,7 +565,7 @@ USE `rewardforpaydb`;
 INSERT INTO `point_redemption` (`id`, `reward_id`, `employee_id`, `redeemed_date`) VALUES (1, 1, 1, '2017-10-18');
 INSERT INTO `point_redemption` (`id`, `reward_id`, `employee_id`, `redeemed_date`) VALUES (2, 1, 2, '2016-01-25');
 INSERT INTO `point_redemption` (`id`, `reward_id`, `employee_id`, `redeemed_date`) VALUES (3, 2, 2, '2019-06-28');
-INSERT INTO `point_redemption` (`id`, `reward_id`, `employee_id`, `redeemed_date`) VALUES (4, 5, 2, '2021-06-06');
+INSERT INTO `point_redemption` (`id`, `reward_id`, `employee_id`, `redeemed_date`) VALUES (4, 6, 2, '2021-06-06');
 INSERT INTO `point_redemption` (`id`, `reward_id`, `employee_id`, `redeemed_date`) VALUES (5, 8, 2, '2016-02-04');
 
 COMMIT;
@@ -604,15 +604,24 @@ COMMIT;
 START TRANSACTION;
 USE `rewardforpaydb`;
 INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (1, 200, '2011-10-18', 1, 'Started this program.', 1, 1, 1);
-INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (2, 75, '2010-06-02', 2, 'Took an extra shift.', 2, 1, 2);
-INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (3, 10000, '2022-08-23', 2, 'Project idea for company.', 3, 1, 3);
-INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (4, 125, '2015-11-08', 4, 'Showed up to work early.', 2, 1, 12);
-INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (5, 75, '2010-05-17', 4, 'Finshined a major milestone.', 2, 1, 4);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (2, 75, '2010-06-02', 2, 'Took an extra shift.', 1, 1, 2);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (3, 10000, '2022-08-23', 2, 'Project idea for company.', 1, 1, 3);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (4, 125, '2015-11-08', 4, 'Showed up to work early.', 1, 1, 12);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (5, 75, '2010-05-17', 4, 'Finshined a major milestone.', 1, 1, 4);
 INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (6, 100, '2009-01-05', 2, 'Took an extra shift.', 1, 1, 13);
 INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (7, 45, '2006-05-05', 2, 'Finshined a major milestone.', 1, 1, 11);
 INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (8, 160, '2007-02-19', 2, 'Showed up to work early.', 1, 1, 10);
 INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (9, 75, '2004-11-10', 2, 'Took an extra shift.', 1, 1, 9);
 INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (10, 65, '2014-08-29', 2, 'Project idea for company.', 1, 1, 16);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (11, 200, '2022-08-29', 8, 'EVENT: Ice Cream Social in the Park', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (12, 500, '2022-09-12', 8, 'EVENT: Quarterly Company Picnic', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (13, 100, '2022-09-9', 8, 'EVENT: Volunteer Day at the HighWay', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (14, 1000, '2022-09-16', 8, 'EVENT: Happy Hour Drinks', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (15, 200, '2022-10-03', 8, 'EVENT: Coffee with the CEO', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (16, 150, '2022-10-18', 8, 'EVENT: Engineering Department Social', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (17, 250, '2022-10-21', 8, 'EVENT: Bring your dog to work day', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (18, 600, '2022-10-26', 8, 'EVENT: Bring your cat to work day!', 1, 1, 8);
+INSERT INTO `point_award` (`id`, `amount`, `issued`, `employee_id`, `description`, `award_status_id`, `judgement`, `requested_id`) VALUES (19, 350, '2022-10-28', 8, 'EVENT: All Hands Lunch in', 1, 1, 8);
 
 COMMIT;
 
@@ -636,6 +645,16 @@ INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (5, 2);
 INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (6, 2);
 INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (7, 2);
 INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (8, 3);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (9, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (10, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (11, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (12, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (13, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (14, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (15, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (16, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (17, 2);
+INSERT INTO `user_has_role` (`user_id`, `user_role_id`) VALUES (18, 2);
 
 COMMIT;
 
@@ -667,7 +686,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `rewardforpaydb`;
-INSERT INTO `group_message` (`id`, `message`, `created`, `squad_id`, `user_id`) VALUES (1, 'Is this showing?', NULL, 1, 6);
+INSERT INTO `group_message` (`id`, `message`, `created`, `squad_id`, `user_id`) VALUES (1, 'Is this showing?', NULL, 3, 6);
 
 COMMIT;
 
@@ -688,8 +707,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `rewardforpaydb`;
-INSERT INTO `group_member` (`id`, `user_id`, `squad_id`) VALUES (1, 6, 3);
-INSERT INTO `group_member` (`id`, `user_id`, `squad_id`) VALUES (2, 5, 2);
+INSERT INTO `group_member` (`id`, `user_id`, `squad_id`) VALUES (1, 6, 1);
+INSERT INTO `group_member` (`id`, `user_id`, `squad_id`) VALUES (2, 5, 1);
 INSERT INTO `group_member` (`id`, `user_id`, `squad_id`) VALUES (3, 7, 1);
 INSERT INTO `group_member` (`id`, `user_id`, `squad_id`) VALUES (4, 1, 3);
 

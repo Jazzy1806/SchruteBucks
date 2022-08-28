@@ -6,11 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin User List</title>
+<link rel ="stylesheet" type ="text/css" href="CSS/adminDashboard.css">
+
 </head>
 <body>
 <%@ include file="../nav.jsp" %>
 
-<h1>Inside Admin User Results</h1>
+<div class="container-fluid">
+<div class="space">
+<h1>User Results</h1>
+
 
 <table class="table table-striped table-hover">
 		<thead class="table-light">
@@ -21,7 +26,7 @@
 				<th>Status</th>
 				<th>Update User</th>
 				<th>Change User Status</th>
-				<th>Delete User</th>
+			
 				
 				
 				
@@ -37,21 +42,21 @@
 					<td><a href="findUser.do?userId=${user.id}">${user.username}</a></td>
 					<td><a href="findUser.do?userId=${user.id}">${user.password}</a></td>
 					<td><c:choose><c:when test="${user.enabled == true}">Active</c:when><c:otherwise>Inactive</c:otherwise></c:choose></td>
-					<td><form action="adminUpdateUserForm.do"><input type ="hidden" name="id" value="${user.id}"><button type="submit" class="btn btn-primary btn-sm">Update this User</button></form>
+					<td><form action="adminUpdateUserForm.do"><input type ="hidden" name="id" value="${user.id}"><button type="submit" class="btn btn-warning btn-sm">Update this User</button></form>
 					<td><c:choose><c:when test="${user.enabled == true}">
 					<form action="deactivateUser.do"><input type="hidden" name="userId" value="${user.id}"><button type="submit" class="btn btn-dark btn-sm">Disable this User</button></form>
 							</c:when><c:otherwise>
 					<form action="activateUser.do"><input type="hidden" name="userId" value="${user.id}"><button type="submit"class="btn btn-success btn-sm">Enable this User</button></form>
 								</c:otherwise></c:choose></td>
-					<td><form action="deleteUser.do"><input type ="hidden" name="id" value="${user.id}"><button type="submit" class="btn btn-danger btn-sm">Delete this User</button></form>
+					
 					
 				</tr>
 				
 			</c:forEach>
 		</tbody>
 	</table>
-
-
+</div>
+</div>
 
 </body>
 </html>

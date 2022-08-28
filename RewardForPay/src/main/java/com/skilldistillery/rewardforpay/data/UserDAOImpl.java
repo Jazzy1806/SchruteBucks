@@ -168,28 +168,30 @@ public class UserDAOImpl implements UserDAO {
 		emp.setPrizes(prizes);
 		emp.setRequestStatus(stat);
 		emp.setAddress(add);
+		emp.setEmployeePhoto(employee.getEmployeePhoto());
 		em.persist(emp);
 		emp.setPointsAwarded(findAllAwards(emp.getId()));
 		return emp;
 	}
 
 	@Override
-	public Employee updateEmployee(int id, Employee employee) {
+	public Employee updateEmployee(int id, Employee employee, int depId) {
 		Employee updated = em.find(Employee.class, id);
+		Department dep= em.find(Department.class, depId);
 		Status stat = em.find(Status.class, 2);
 		updated.setRequestStatus(stat);
 		updated.setFirstName(employee.getFirstName());
 		updated.setLastName(employee.getLastName());
 		updated.setSalary(employee.getSalary());
-		
-		updated.setDepartment(employee.getDepartment());
+		updated.setEmployeePhoto(employee.getEmployeePhoto());
+		updated.setDepartment(dep);
 //		updated.setSupervisorId(employee.getSupervisorId());
 //		updated.setEmployeePhoto(employee.getEmployeePhoto());
 		updated.setBirthday(employee.getBirthday());
 //		updated.setDescription(employee.getDescription());
 		
 		
-		return employee;
+		return updated;
 	}
 
 	@Override
@@ -225,7 +227,7 @@ public class UserDAOImpl implements UserDAO {
 		String redeemedquery = "SELECT pr FROM PointRedemption pr WHERE employee_id = :employeeId";
 		List<PointRedemption> redeemed = em.createQuery(redeemedquery, PointRedemption.class)
 				.setParameter("employeeId", employeeId).getResultList();
-		String awaredquery = "SELECT pa FROM PointAwarded pa WHERE employee_id = :employeeId";
+		String awaredquery = "SELECT pa FROM PointAwarded pa WHERE employee_id = :employeeId AND award_status_id=1";
 		List<PointAwarded> awarded = em.createQuery(awaredquery, PointAwarded.class)
 				.setParameter("employeeId", employeeId).getResultList();
 
@@ -277,7 +279,7 @@ public class UserDAOImpl implements UserDAO {
 		Status status = em.find(Status.class, 4);
 		Prize deleted = em.find(Prize.class, id);
 		deleted.setStatus(status);
-		boolean success = !em.contains(deleted);
+		boolean success = em.contains(deleted);
 		return success;
 	}
 
